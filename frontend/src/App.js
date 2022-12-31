@@ -5,7 +5,6 @@ import React from 'react';
 class App extends React.Component {
 
     state = {
-        count: 0,
         ws: null
     };
 
@@ -32,11 +31,9 @@ class App extends React.Component {
 
     sendMessage = (ev) => {
         ev.preventDefault();
-        this.state.count += 1;
         const input = document.getElementById("messageText");
         const ws = this.state.ws;
         const data = {
-            count: this.state.count,
             message: input.value
         }
         ws.send(JSON.stringify(data))
