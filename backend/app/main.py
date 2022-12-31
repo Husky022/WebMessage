@@ -24,15 +24,12 @@ async def websocket_endpoint(websocket: WebSocket):
 	while True:
 		try:
 			# Получаем данные
-			data = await websocket.receive()
-			data_dict = json.loads(data['text'])
+			data = await websocket.receive_json()
 			count += 1
-			print(count)
 			# Здесь можем что то с этими данными сделать, обработать их
-			data_dict['count'] = count
-			data_str = json.dumps(data_dict)
+			data['count'] = count
 			# и далее отправляем их клиенту
-			await websocket.send_text(data_str)
+			await websocket.send_json(data)
 		except Exception as e:
 			print('error:', e)
 			break
